@@ -1,4 +1,8 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
 from functools import wraps
+
 import os
 import datetime
 from werkzeug.utils import secure_filename
@@ -37,11 +41,11 @@ def index(page=None):
     tid = request.args.get("tid", 0)
     if int(tid) != 0:
         page_data = page_data.filter_by(tag_id=int(tid))
-
+    
     star = request.args.get("star", 0)
     if int(tid) != 0:
         page_data = page_data.filter_by(tag_id=int(tid))
-
+    
     time = request.args.get("time", 0)
     if int(time) != 0:
         if int(time) == 1:
@@ -52,7 +56,7 @@ def index(page=None):
             page_data = page_data.order_by(
                 Movie.addtime.asc()
             )
-
+    
     pm = request.args.get("pm", 0)
     if int(pm) != 0:
         if int(pm) == 1:
@@ -63,7 +67,7 @@ def index(page=None):
             page_data = page_data.order_by(
                 Movie.playnum.asc()
             )
-
+    
     cm = request.args.get("cm", 0)
     if int(cm) != 0:
         if int(cm) == 1:
@@ -76,7 +80,7 @@ def index(page=None):
             )
     if page is None:
         page = 1
-
+    
     page_data = page_data.paginate(page=page, per_page=10)
     p = dict(
         tags=tags,
@@ -165,7 +169,7 @@ def user():
         if email_count == 1 and data["email"] != user.email:
             flash("该邮箱已存在", "err")
             return redirect(url_for('home.user'))
-
+    
         phone_count = User.query.filter_by(phone=data["phone"]).count()
         if phone_count == 1 and data["phone"] != user.phone:
             flash("该手机号码已存在", "err")
@@ -315,7 +319,7 @@ def play(id=None, page=None):
     ).order_by(
         Comment.addtime.desc()
     ).paginate(page=page, per_page=10)
-
+    
     movie.playnum += 1
     form = CommentForm()
     if "user" in session and form.validate_on_submit():

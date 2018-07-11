@@ -1,7 +1,16 @@
+﻿#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
 import datetime
 import uuid
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 from flask import render_template, redirect, url_for, flash, request, session, abort
 from functools import wraps
+
+from werkzeug.security import generate_password_hash
+
 from app.models import Admin, Tag, db, Movie, Preview, User, Comment, Moviecol, Oplog, Adminlog, Userlog, Auth, Role
 from app import app
 from .forms import LoginForm, TagForm, MovieForm, PreviewForm, PwdForm, AuthForm, RoleForm, AdminForm
@@ -28,7 +37,7 @@ def admin_login_req(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# 权限控制装饰器
+# # 权限控制装饰器
 # def admin_auth(f):
 #     @wraps(f)
 #     def decorated_function(*args, **kwargs):
@@ -599,17 +608,19 @@ def auth_edit(id):
     auth = Auth.query.get_or_404(id)
     if form.validate_on_submit():
         data = form.data
-        name = data["auth"]
-        url = data["url"]
+        auth = Auth(
+            name=data["name"],
+            url =data["url"]
+        )
         db.session.add(auth)
         db.session.commit()
-        flash("修改标签成功！", "ok")
+        flash("修改权限成功！", "ok")
         return redirect(url_for('admin.auth_edit', id=id))
     return render_template('admin/auth_edit.html', form=form, auth=auth)
 
 
 @admin.route("/admin/add/", methods=["GET", "POST"])
-@admin_login_req
+# @admin_login_req
 # @admin_auth
 def admin_add():
     form = AdminForm()
@@ -622,6 +633,7 @@ def admin_add():
             pwd = generate_password_hash(data["pwd"]),
             is_super = 1
         )
+
         db.session.add(admin)
         db.session.commit()
         flash("添加管理员成功！", "ok")

@@ -1,3 +1,6 @@
+﻿#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, FileField, TextAreaField, SelectField, DateField, SelectMultipleField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
@@ -17,7 +20,6 @@ class LoginForm(FlaskForm):
         render_kw={
             "class": "form-control",
             "placeholder": "请输入账号！",
-            # "required":"required"
         }
     )
     pwd = PasswordField(

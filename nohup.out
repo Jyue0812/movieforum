@@ -1,0 +1,29 @@
+Traceback (most recent call last):
+  File "manage.py", line 1, in <module>
+    from flask_migrate import Migrate, MigrateCommand
+ImportError: No module named flask_migrate
+Traceback (most recent call last):
+  File "manage.py", line 1, in <module>
+    from flask_migrate import Migrate, MigrateCommand
+ImportError: No module named flask_migrate
+Traceback (most recent call last):
+  File "manage.py", line 1, in <module>
+    from flask_migrate import Migrate, MigrateCommand
+ImportError: No module named flask_migrate
+Traceback (most recent call last):
+  File "manage.py", line 1, in <module>
+    from flask_migrate import Migrate, MigrateCommand
+ImportError: No module named flask_migrate
+Traceback (most recent call last):
+  File "manage.py", line 1, in <module>
+    from flask_migrate import Migrate, MigrateCommand
+ImportError: No module named flask_migrate
+Traceback (most recent call last):
+  File "manage.py", line 3, in <module>
+    from app import app
+  File "/usr/local/nginx/html/movieforum-flask/app/__init__.py", line 19, in <module>
+    from app.home import home as home_blueprint
+  File "/usr/local/nginx/html/movieforum-flask/app/home/__init__.py", line 6, in <module>
+    import app.home.views
+  File "/usr/local/nginx/html/movieforum-flask/app/home/views.py", line 14
+SyntaxError: Non-ASCII character '\xe4' in file /usr/local/nginx/html/movieforum-flask/app/home/views.py on line 14, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details

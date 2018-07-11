@@ -1,3 +1,6 @@
+﻿#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
 from datetime import datetime
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -6,9 +9,10 @@ import os
 
 app = Flask(__name__)
 basedir= os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] =  'sqlite:///'+ os.path.join(basedir,'data.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:123456@127.0.0.1:3306/movie"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+db.create_all()
 
 class User(db.Model):
     __tablename__ = "user"
@@ -171,7 +175,7 @@ class Role(db.Model):
         return "<Role %r>" % self.name
 
 if __name__ == '__main__':
-    # db.create_all()
+    db.create_all()
     '''from werkzeug.security import generate_password_hash
 
     admin = Admin(

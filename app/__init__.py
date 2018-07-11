@@ -6,8 +6,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY']='xxx'
 CSRF_ENABLED = False
 basedir= os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] =  'sqlite:///'+ os.path.join(basedir,'data.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] =  "mysql+pymysql://root:123456@127.0.0.1:3306/movie"
+# app.config['SQLALCHEMY_DATABASE_URI'] =  'sqlite:///'+ os.path.join(basedir,'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
 app.config['UP_DIR'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static/uploads/")
 app.config['FC_DIR'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), "static/uploads/users/")
 app.debug = True
